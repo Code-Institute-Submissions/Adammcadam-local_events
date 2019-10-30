@@ -1,18 +1,26 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>SHIT!</h1>
-<div class="row">
-    <div class="col-xs-12">
-        <!-- display in some form of slider based on most viewed -->
-    {% for band in bands %}
-        {{ band.band_name }}</br>
-        {{ band.venue_name }}</br>
-        {% if band.is_headlining == true %}Yes{% else %}No{% endif %}</br>
-        {% if band.is_supporting == true %}Yes{% else %}No{% endif %}</br>
-        {{ band.event_date.strftime('%d-%m-%Y @ %H:%M') }}</br>
-        {{ band.views }}</br>
-    {% endfor %}
+    <div class="container">
+        <div class="row">
+        {% for band in bands %}
+            <div class="card" style="width: 18rem;">
+                <img src="#" class="card-img-top" alt="#">
+                <div class="card-body">
+                    <h5 class="card-title">{{ band.band_name }}</h5>
+                    <p class="card-text">
+                        Headlining: {% if band.is_headlining == true %}Yes{% else %}No{% endif %}</br>
+                        {% if band.is_supporting == true %}
+                            Supporting: Yes</br>
+                        {% else %}
+                            <div style="display:none"></div>
+                        {% endif %}
+                        Time: {{ band.event_date.strftime('%d-%m-%Y @ %H:%M') }}</br>
+                        Views: {{ band.views }}</br>
+                    </p>
+                    <a href="#" class="btn btn-primary">Venue: {{ band.venue_name }}</a>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
     </div>
-</div>
-
 {% endblock %}
