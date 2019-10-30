@@ -3,12 +3,14 @@
 <h1>SHIT!</h1>
 <div class="row">
     <div class="col-xs-12">
+        <!-- display in some form of slider based on most viewed -->
     {% for band in bands %}
-        {{ band.band_name }}
-        {{ band.venue_name }}
-        {% if band.is_headlining == true %}Yes{% else %}No{% endif %}
-        {% if band.is_supporting == true %}Yes{% else %}No{% endif %}
-        {{ band.event_date.strftime('%d-%m-%Y @ %H:%M') }}
+        {{ band.band_name }}</br>
+        {{ band.venue_name }}</br>
+        {% if band.is_headlining == true %}Yes{% else %}No{% endif %}</br>
+        {% if band.is_supporting == true %}Yes{% else %}No{% endif %}</br>
+        {{ band.event_date.strftime('%d-%m-%Y @ %H:%M') }}</br>
+        {{ band.views }}</br>
     {% endfor %}
     </div>
 </div>
