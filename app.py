@@ -18,8 +18,8 @@ def get_bands():
     
 @app.route('/add_band')
 def add_bands():
-    _venues = venues=mongo.db.venues.find()
-    venue_list = [venue for venue in _venues]
+    venues = venues=mongo.db.venues.find()
+    venue_list = [venue for venue in venues]
     return render_template("addband.html", venues = venue_list)
     
 @app.route('/insert_band', methods=['POST'])
