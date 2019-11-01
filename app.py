@@ -45,6 +45,20 @@ def update_band(band_id):
     })
     return redirect(url_for('get_bands'))
     
+@app.route('/complete_event/<band_id>', methods=['POST'])
+def complete_event(band_id):
+    bands = mongo.db.bands
+    bands.update({ '_id' : ObjectId(band_id)},
+    {   
+        'band_name' : request.form.get('band_name'),
+        'venue_name' : request.form.get('venue_name'),
+        'is_headlining' : request.form.get('is_headlining'),
+        'event_date' : request.form.get('event_date'),
+        'band_logo' : request.form.get('band_logo'),
+        'is_done' : 'true'
+    })
+    return redirect(url_for('get_bands'))
+    
 @app.route('/get_venues')
 def get_venues():
     return render_template("venues.html", venues=mongo.db.bands.find())
