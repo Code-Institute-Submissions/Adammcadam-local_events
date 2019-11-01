@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block content %}
+<style type="text/css">
+    .padding{
+        padding-top:100px;
+        padding-bottom: 50px;
+    }
+    .form-check-input {
+        position: relative;
+        left: 20px;
+    }
+</style>
+
+<div class="col-sm-10 offset-1">
+    <h3>Add your Band</h3></br>
+    <form action"{{ url_for('insert_band')}}" method="POST">
+        <div class="form-group">
+            <label for="band_logo">Upload Your Bands Logo</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-upload"></i></span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="band_logo" id="band_logo" name="band_logo">
+                    <label class="custom-file-label" for="band_logo">Choose file</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="band_name">Band Name</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-guitar"></i></span>
+                </div>
+                <input type="text" class="form-control" id="band_name" name="band_name" placeholder="Enter your band name">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="event_date">Event Date </label>
+            <div class="input-group" id="event_date" data-target-input="nearest">
+                <div class="input-group-prepend" data-target="#event_date" data-toggle="event_date">
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-calendar-week"></i></span>
+                </div>
+                <input type="text" class="form-control datetimepicker-input" id="datetimepicker5" data-toggle="datetimepicker" data-target="#datetimepicker5" placeholder="Select a Date/Time"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="venue_name">Where are you playing?</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="venue_name"><i class="fas fa-filter"></i></label>
+                </div>
+                <select class="custom-select" id="venue_name" name="venue_name">
+                    <option selected>Choose an option</option>
+                    {% for venue in venues %}
+                    <option value="{{ venue.venue_name }}">{{ venue.venue_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-check-label" for="is_headlining">Are you headlining?</label>
+            <input type="checkbox" class="form-check-input" id="is_headlining" name="is_headlining">
+        </div>
+        <div class="form-group">
+            <label class="form-check-label" for="is_supporting">Are you supporting?</label>
+            <input type="checkbox" class="form-check-input" id="is_supporting" name="is_supporting">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit <i class="fas fa-paper-plane"></i></button>
+    </form>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker5').datetimepicker();
+    });
+</script>
+
+{% endblock %}
