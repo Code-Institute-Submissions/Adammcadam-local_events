@@ -1,50 +1,44 @@
 {% extends 'base.html' %}
 {% block content %}
-<style type="text/css">
-    .padding{
-        padding-top:100px;
-        padding-bottom: 50px;
-    }
-</style>
 <!--most viewed -->
 <div class="container-fluid">
     <div class="row">
-        {% for band in bands %}
         <div class="col-sm-10 offset-1">
-            <div>
-                <h1>Most Viewed</h1>
-            </div>
-            <div class="col-sm-12">
-                <div class="card" style="width: 18rem;">
-                    <img src="#" class="card-img-top" alt="band_logo">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ band.band_name }}</h5>
-                        <p class="card-text">
-                            Headlining: {% if band.is_headlining == true %}Yes{% else %}No{% endif %}</br>
-                            {% if band.is_supporting == true %}
-                                Supporting: Yes</br>
-                            {% else %}
-                                <div style="display:none"></div>
-                            {% endif %}
-                            Time: {{ band.event_date.strftime('%d-%m-%Y @ %H:%M') }}</br>
-                            Views: {{ band.views }}</br>
-                        </p>
-                        <a href="#" class="btn btn-primary">Venue: {{ band.venue_name }}</a>
+            <h1>Most Viewed</h1>
+        </div>
+        <div class="col-sm-10 offset-1">
+            <div class="row">
+                {% for band in bands %}
+                    <div class="col-sm-3">
+                        <div class="card" style="width: 18em, height: 50px">
+                            <img src="#" class="card-img-top" alt="band_logo">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ band.band_name }}</h5>
+                                <p class="card-text">
+                                    Headlining: {% if band.is_headlining == true %}Yes{% else %}No{% endif %}</br>
+                                    Time: {{ band.event_date.strftime('%d-%m-%Y @ %H:%M') }}</br>
+                                    Views: {{ band.views }}</br>
+                                </p>
+                                <a href="{{ url_for('edit_band', band_id=band._id) }}" class="btn btn-primary">Edit Event <i class="fas fa-edit"></i></a>
+                                <a href="#" class="btn btn-primary">View Venue <i class="fas fa-binoculars"></i></a>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
-        {% endfor %}
+        
     </div>
 
     <!--upcoming-->
     
     <div class="row">
-        {% for band in bands %}
         <div class="col-sm-10 offset-1">
-            <div>
-                <p>Upcoming</p>
-            </div>
+            <h1>Upcoming Events</h1>
+        </div>
+        <div class="col-sm-10 offset-1">
+        {% for band in bands %}
+        <div class="col-sm-4">
             <div class="card" style="width: 18rem;">
                 <img src="#" class="card-img-top" alt="#">
                 <div class="card-body">
@@ -64,6 +58,28 @@
             </div>
         </div>
         {% endfor %}
+        </div>
     </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-5 offset-1">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

@@ -1,16 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-<style type="text/css">
-    .padding{
-        padding-top:100px;
-        padding-bottom: 50px;
-    }
-    .form-check-input {
-        position: relative;
-        left: 20px;
-    }
-</style>
-
 <div class="col-sm-10 offset-1">
     <h3>Add your Band</h3></br>
     <form action"{{ url_for('insert_band')}}" method="POST">
@@ -32,7 +21,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1"><i class="fas fa-guitar"></i></span>
                 </div>
-                <input type="text" class="form-control" id="band_name" name="band_name" placeholder="Enter your band name">
+                <input type="text" class="form-control" id="band_name" name="band_name" placeholder="Enter your band name" required>
             </div>
         </div>
         
@@ -42,7 +31,7 @@
                 <div class="input-group-prepend" data-target="#event_date" data-toggle="event_date">
                     <span class="input-group-text" id="basic-addon1"><i class="fas fa-calendar-week"></i></span>
                 </div>
-                <input type="text" class="form-control datetimepicker-input" id="datetimepicker5 event_date" name="event_date" data-toggle="datetimepicker" data-target="#datetimepicker5" placeholder="Select a Date/Time"/>
+                <input type="text" class="form-control datetimepicker-input" id="datetimepicker5" name="event_date" data-toggle="datetimepicker" data-target="#datetimepicker5" placeholder="Select a Date/Time" required/>
             </div>
         </div>
         <div class="form-group">
@@ -63,17 +52,18 @@
             <label class="form-check-label" for="is_headlining">Are you headlining?</label>
             <input type="checkbox" class="form-check-input" id="is_headlining" name="is_headlining">
         </div>
-        <div class="form-group">
-            <label class="form-check-label" for="is_supporting">Are you supporting?</label>
-            <input type="checkbox" class="form-check-input" id="is_supporting" name="is_supporting">
-        </div>
         <button type="submit" class="btn btn-primary">Submit <i class="fas fa-paper-plane"></i></button>
     </form>
 </div>
 
+
+
 <script type="text/javascript">
-    $(function () {
-        $('#datetimepicker5').datetimepicker();
+
+    $(document).ready(function() {
+        $('#datetimepicker5').on('click', function() {
+            $('#datetimepicker5').datetimepicker();
+        })
     });
 </script>
 

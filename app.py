@@ -18,15 +18,20 @@ def get_bands():
     
 @app.route('/add_band')
 def add_bands():
-    venues = venues=mongo.db.venues.find()
-    venue_list = [venue for venue in venues]
-    return render_template("addband.html", venues = venue_list)
+    return render_template("addband.html", venues=mongo.db.venues.find())
     
 @app.route('/insert_band', methods=['POST'])
 def insert_band():
     bands = mongo.db.bands
     bands.insert_one(request.form.to_dict())
     return redirect(url_for('get_bands'))
+    
+@app.route('/edit_band/<band_id>')
+def edit_band(band_id):
+    the_band = mongo.db.bands.find_one({"_id": ObjectId(band_id)})
+    all_venues = mongo.db.venues.find()
+    return render_template('editband.html', band=the_band, venues=all_venues)
+    
 
     
 if __name__ == '__main__':
