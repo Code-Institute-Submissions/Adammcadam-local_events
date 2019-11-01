@@ -1,8 +1,50 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="container">
-        <div class="row">
+<style type="text/css">
+    .padding{
+        padding-top:100px;
+        padding-bottom: 50px;
+    }
+</style>
+<!--most viewed -->
+<div class="container-fluid">
+    <div class="row">
         {% for band in bands %}
+        <div class="col-sm-10 offset-1">
+            <div>
+                <h1>Most Viewed</h1>
+            </div>
+            <div class="col-sm-12">
+                <div class="card" style="width: 18rem;">
+                    <img src="#" class="card-img-top" alt="#">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ band.band_name }}</h5>
+                        <p class="card-text">
+                            Headlining: {% if band.is_headlining == true %}Yes{% else %}No{% endif %}</br>
+                            {% if band.is_supporting == true %}
+                                Supporting: Yes</br>
+                            {% else %}
+                                <div style="display:none"></div>
+                            {% endif %}
+                            Time: {{ band.event_date.strftime('%d-%m-%Y @ %H:%M') }}</br>
+                            Views: {{ band.views }}</br>
+                        </p>
+                        <a href="#" class="btn btn-primary">Venue: {{ band.venue_name }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!--upcoming-->
+    
+    <div class="row">
+        {% for band in bands %}
+        <div class="col-sm-10 offset-1">
+            <div>
+                <p>Upcoming</p>
+            </div>
             <div class="card" style="width: 18rem;">
                 <img src="#" class="card-img-top" alt="#">
                 <div class="card-body">
@@ -20,7 +62,8 @@
                     <a href="#" class="btn btn-primary">Venue: {{ band.venue_name }}</a>
                 </div>
             </div>
-        {% endfor %}
         </div>
+        {% endfor %}
     </div>
+</div>
 {% endblock %}
