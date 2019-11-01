@@ -15,6 +15,10 @@ mongo = PyMongo(app)
 @app.route('/get_bands')
 def get_bands():
     return render_template("bands.html", bands=mongo.db.bands.find())
+    
+@app.route('/add_band')
+def add_bands():
+    return render_template("addband.html", bands=mongo.db.bands.find())
 
     
 if __name__ == '__main__':
