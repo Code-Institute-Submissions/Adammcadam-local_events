@@ -18,7 +18,7 @@ def get_bands():
     
 @app.route('/add_band')
 def add_bands():
-    return render_template("addband.html", bands=mongo.db.bands.find())
+    return render_template("addband.html", venues=mongo.db.venues.find())
 
     
 if __name__ == '__main__':
