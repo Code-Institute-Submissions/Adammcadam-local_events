@@ -32,7 +32,21 @@ def edit_band(band_id):
     all_venues = mongo.db.venues.find()
     return render_template('editband.html', band=the_band, venues=all_venues)
     
-
+@app.route('/update_band/<band_id>', methods=['POST'])
+def update_band(band_id):
+    bands = mongo.db.bands
+    bands.update({ '_id' : ObjectId(band_id)},
+    {
+        'band_name' : request.form.get('band_name'),
+        'venue_name' : request.form.get('venue_name'),
+        'is_headlining' : request.form.get('is_headlining'),
+        'event_date' : request.form.get('event_date'),
+        'band_logo' : request.form.get('band_logo'),
+    })
+    
+@app.route('/get_venues')
+def get_venues():
+    return render_template("venues.html", venues=mongo.db.bands.find())
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
