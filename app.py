@@ -43,6 +43,7 @@ def update_band(band_id):
         'event_date' : request.form.get('event_date'),
         'band_logo' : request.form.get('band_logo'),
     })
+    return redirect(url_for('get_bands'))
     
 @app.route('/get_venues')
 def get_venues():
