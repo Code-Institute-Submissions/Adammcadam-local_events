@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template, redirect, request, url_for
 from flask_pymongo import PyMongo
+from forms import CreateBandForm, EditBandForm, ConfirmCompletion
 from bson.objectid import ObjectId
 
 app = Flask(__name__)
@@ -14,54 +15,80 @@ mongo = PyMongo(app)
 @app.route('/')
 @app.route('/get_bands')
 def get_bands():
-    return render_template("bands.html", bands=mongo.db.bands.find())
+    recent_bands = mongo.db.bands.find().sort({'event_date' : -1}).limit(4)
+    most_viewed = mongo.db.bands.find().sort({'views' : -1}).limit(4)
+    return render_template("bands.html", recent=recent_bands, most_viewed=most_viewed)
     
-@app.route('/add_band')
-def add_bands():
-    return render_template("addband.html", venues=mongo.db.venues.find())
-    
-@app.route('/insert_band', methods=['POST'])
+@app.route('/insert_band', methods=['GET', 'POST'])
 def insert_band():
-    bands = mongo.db.bands
-    bands.insert_one(request.form.to_dict())
-    return redirect(url_for('get_bands'))
+    form = CreateBandForm(request.form)
+    if form.validate_on_submit():
+        bands_db = mongo.db.bands
+        bands_db.insert_one({
+            'band_name' : request.form['band_name'],
+            'venue_name' : request.form['venue_name'],
+            'is_headlining' : request.form['is_headlining'],
+            'event_date' : request.form['event_date'],
+            'views' : 0,
+            'band_logo' : request.form['band_logo']
+        })
+        return redirect(url_for('get_bands'))
+    return render_template('addband.html', form=form)
     
-@app.route('/edit_band/<band_id>')
+    
+@app.route('/edit_band/<band_id>', methods=['GET', 'POST'])
 def edit_band(band_id):
-    the_band = mongo.db.bands.find_one({"_id": ObjectId(band_id)})
+    band_db = mongo.db.bands.find_one({"_id": ObjectId(band_id)})
+    if request.method == 'GET':
+        form = EditBandForm(data=band_db)
+        return render_template('editband.html', band=band_db, form=form)
+    form = EditBandForm(request.form)
+    if form.validate_on_submit():
+        band_db = mongo.db.bands
+        band_db.update_one({
+            '_id' : ObjectId(band_id)
+        }, {
+            '$set' :  {
+                'band_name' : request.form['band_name'],
+                'venue_name' : request.form['venue_name'],
+                'is_headlining' : request.form['is_headlining'],
+                'event_date' : request.form['event_date'],
+                'band_logo' : request.form['band_logo']
+            }
+        })
+        return redirect(url_for('get_bands'))
     all_venues = mongo.db.venues.find()
-    return render_template('editband.html', band=the_band, venues=all_venues)
+    return render_template('editband.html', band=band_db, venues=all_venues, form=form)
+
     
-@app.route('/update_band/<band_id>', methods=['POST'])
-def update_band(band_id):
-    bands = mongo.db.bands
-    bands.update({ '_id' : ObjectId(band_id)},
-    {
-        'band_name' : request.form.get('band_name'),
-        'venue_name' : request.form.get('venue_name'),
-        'is_headlining' : request.form.get('is_headlining'),
-        'event_date' : request.form.get('event_date'),
-        'band_logo' : request.form.get('band_logo'),
-    })
-    return redirect(url_for('get_bands'))
-    
-@app.route('/complete_event/<band_id>', methods=['POST'])
+@app.route('/complete_event/<band_id>', methods=['GET','POST'])
 def complete_event(band_id):
-    bands = mongo.db.bands
-    bands.update({ '_id' : ObjectId(band_id)},
-    {   
-        'band_name' : request.form.get('band_name'),
-        'venue_name' : request.form.get('venue_name'),
-        'is_headlining' : request.form.get('is_headlining'),
-        'event_date' : request.form.get('event_date'),
-        'band_logo' : request.form.get('band_logo'),
-        'is_done' : 'true'
-    })
-    return redirect(url_for('get_bands'))
+    band_db = mongo.db.bands.find_one({"_id": ObjectId(band_id)})
+    if request.method == 'GET':
+        form = ConfirmCompletion(data=band_db)
+        return render_template('complete_event.html', band=band_db, form=form)
+    form = ConfirmCompletion(band_db)
+    if form.validate_on_submit():
+        band_db = mongo.db.bands
+        band_db.update_one({
+            '_id' : ObjectId(band_id)
+        }, {
+            '$set' : {
+                'is_done' : True 
+            }
+        })
+        return redirect(url_for('get_bands'))
+    all_venues = mongo.db.venues.find()
+    return render_template('complete_event.html', band=band_db, venues=all_venues, form=form)
+
     
 @app.route('/get_venues')
 def get_venues():
     return render_template("venues.html", venues=mongo.db.bands.find())
+    
+@app.route(404)
+def handle_404(exception):
+    return render_template('404.html', exception=exception)
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
