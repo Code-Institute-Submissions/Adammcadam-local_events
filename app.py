@@ -15,9 +15,9 @@ mongo = PyMongo(app)
 @app.route('/')
 @app.route('/get_bands')
 def get_bands():
-    recent_bands = mongo.db.bands.find().sort({'event_date' : -1}).limit(4)
-    most_viewed = mongo.db.bands.find().sort({'views' : -1}).limit(4)
-    return render_template("bands.html", recent=recent_bands, most_viewed=most_viewed)
+    recent_bands = mongo.db.bands.find().sort([("event_date", -1)]).limit(4)
+    most_viewed = mongo.db.bands.find().sort([("views", -1)]).limit(4)
+    return render_template("bands.html", recent_bands=recent_bands, most_viewed=most_viewed)
     
 @app.route('/insert_band', methods=['GET', 'POST'])
 def insert_band():
@@ -86,7 +86,7 @@ def complete_event(band_id):
 def get_venues():
     return render_template("venues.html", venues=mongo.db.bands.find())
     
-@app.route(404)
+@app.errorhandler(404)
 def handle_404(exception):
     return render_template('404.html', exception=exception)
     
