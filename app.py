@@ -1,14 +1,14 @@
 import os
 import math
 from flask import Flask, render_template, redirect, request, url_for
-from flask_pymongo import PyMongo, DESCENDING
+from flask_pymongo import PyMongo
 from forms import CreateBandForm, EditBandForm, ConfirmCompletion, CreateVenueForm
 from bson.objectid import ObjectId
 
 app = Flask(__name__)
 
 app.config["MONGO_DBNAME"] = 'local_events'
-app.config["MONGO_URI"] = ''
+app.config["MONGO_URI"] = 'mongodb+srv://root:eu4QBwmtZMzd0HU6@myfirstcluster-xm8rq.mongodb.net/local_events?retryWrites=true&w=majority'
 # this solves CSRF key issues
 SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
