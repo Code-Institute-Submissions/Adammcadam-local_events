@@ -10,8 +10,9 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">{{ venue.venue_name }}</h5>
-                        <p class="card-text">Venue Description to be added</p>
-                        <a href="#" class="btn btn-primary">Go take a look <i class="fas fa-binoculars"></i></a>
+                        <p class="card-text">{{ venue.venue_desc }}</p>
+                        <p class="card-text">{{ venue.venue_location }}</p>
+                        <a href="{{ venue.venue_website }}" class="btn btn-primary">Go take a look <i class="fas fa-binoculars"></i></a>
                     </div>
                 </div>
             </div>
