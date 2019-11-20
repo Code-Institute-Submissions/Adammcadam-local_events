@@ -10,8 +10,7 @@
                     <span class="input-group-text"><i class="fas fa-upload"></i></span>
                 </div>
                 <div class="custom-file">
-                    <input type="file" class="band_logo" id="band_logo" name="band_logo">
-                    <label class="custom-file-label" for="band_logo">Choose file</label>
+                    <input type="text" class="form-control" id="band_logo" name="band_logo" placeholder="Enter your band logo URL">
                 </div>
             </div>
         </div>
@@ -43,7 +42,7 @@
                 <select class="custom-select" id="venue_name" name="venue_name">
                     <option selected>Choose an option</option>
                     {% for venue in venues %}
-                    <option value="{{ venue.venue_name }}">{{ venue.venue_name }}</option>
+                        <option value="{{ venue.venue_name }}">{{ venue.venue_name }}</option>
                     {% endfor %}
                 </select>
             </div>
