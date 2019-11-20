@@ -1,7 +1,7 @@
 import os
 import math
 from flask import Flask, render_template, redirect, request, url_for
-from flask_pymongo import PyMongo
+from flask_pymongo import PyMongo, DESCENDING
 from forms import CreateBandForm, EditBandForm, ConfirmCompletion, CreateVenueForm
 from bson.objectid import ObjectId
 
