@@ -34,6 +34,7 @@ virtualenvwrapper==4.8.4
 Werkzeug==0.16.0
 wrapt==1.11.2
 Flask-WTF==0.14.2
+Flask-PyMongo===2.2.0
 MarkupSafe==1.1.1
 WTForms==2.2.1
 Werkzeug==0.16.0 
