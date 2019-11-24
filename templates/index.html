@@ -14,18 +14,17 @@
                     {% else %}
                         <div class="col-sm-3">
                             <div class="card" style="width: 18em, height: 50px">
-                                <img src="#" class="card-img-top" alt="band_logo">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ viewed.band_name }}</h5>
                                     <p class="card-text">
                                         Headlining: {% if viewed.is_headlining == true %}Yes{% else %}No{% endif %}</br>
-                                        Time: {{ viewed.event_date.strftime('%d-%m-%Y @ %H:%M') }}</br>
+                                        Time: {{ viewed.event_date }}</br>
                                         Views: {{ viewed.views }}</br>
                                     </p>
                                     <a href="{{ url_for('edit_band', band_id=viewed._id) }}" class="btn btn-primary">Edit Event <i class="fas fa-edit"></i></a>
                                     <a href="{{ url_for('get_venues') }}" class="btn btn-primary">View Venue <i class="fas fa-binoculars"></i></a>
                                     <form action="{{ url_for('complete_event', band_id=viewed._id)}}" method="POST">
-                                        <a href="{{ url_for('edit_band', band_id=viewed._id) }}" class="btn btn-danger">Mark as Complete <i class="far fa-check-circle"></i></a>
+                                        <a href="{{ url_for('complete_event', band_id=viewed._id) }}" class="btn btn-danger">Mark as Complete <i class="far fa-check-circle"></i></a>
                                     </form>
                                 </div>
                             </div>
@@ -44,27 +43,33 @@
             <h1>Upcoming Events</h1>
         </div>
         <div class="col-sm-10 offset-1">
-        {% for band in recent_bands %}
-        <div class="col-sm-3">
-            <div class="card" style="width: 18em, height: 50px">
-                <img src="#" class="card-img-top" alt="band_logo">
-                <div class="card-body">
-                    <h5 class="card-title">{{ band.band_name }}</h5>
-                    <p class="card-text">
-                        Headlining: {% if band.is_headlining == true %}Yes{% else %}No{% endif %}</br>
-                        Time: {{ band.event_date.strftime('%d-%m-%Y @ %H:%M') }}</br>
-                        Views: {{ band.views }}</br>
-                    </p>
-                    <a href="{{ url_for('edit_band', band_id=band._id) }}" class="btn btn-primary">Edit Event <i class="fas fa-edit"></i></a>
-                    <a href="{{ url_for('get_venues') }}" class="btn btn-primary">View Venue <i class="fas fa-binoculars"></i></a>
-                    <form action="{{ url_for('complete_event', band_id=band._id)}}" method="POST">
-                        <a href="{{ url_for('edit_band', band_id=band._id) }}" class="btn btn-danger">Mark as Complete <i class="far fa-check-circle"></i></a>
-                    </form>
-                </div>
+            <div class="row">
+                {% for recent in recent_bands %}
+                    {% if recent.is_done == true %}
+                        <div style=display:none></div>
+                    {% else %}
+                        <div class="col-sm-3">
+                            <div class="card" style="width: 18em, height: 50px">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ recent.band_name }}</h5>
+                                    <p class="card-text">
+                                        Headlining: {% if recent.is_headlining == true %}Yes{% else %}No{% endif %}</br>
+                                        Time: {{ recent.event_date }}</br>
+                                        Views: {{ recent.views }}</br>
+                                    </p>
+                                    <a href="{{ url_for('edit_band', band_id=recent._id) }}" class="btn btn-primary">Edit Event <i class="fas fa-edit"></i></a>
+                                    <a href="{{ url_for('get_venues') }}" class="btn btn-primary">View Venue <i class="fas fa-binoculars"></i></a>
+                                    <form action="{{ url_for('complete_event', band_id=recent._id)}}" method="POST">
+                                        <a href="{{ url_for('complete_event', band_id=recent._id) }}" class="btn btn-danger">Mark as Complete <i class="far fa-check-circle"></i></a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
-        {% endfor %}
-        </div>
+        
     </div>
 </div>
 {% endblock %}

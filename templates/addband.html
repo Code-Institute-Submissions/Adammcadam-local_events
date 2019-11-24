@@ -2,18 +2,7 @@
 {% block content %}
 <div class="col-sm-10 offset-1">
     <h3>Add your Band</h3></br>
-    <form action"{{ url_for('insert_band')}}" method="POST">
-        <div class="form-group">
-            <label for="band_logo">Upload Your Bands Logo</label>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-upload"></i></span>
-                </div>
-                <div class="custom-file">
-                    <input type="text" class="form-control" id="band_logo" name="band_logo" placeholder="Enter your band logo URL">
-                </div>
-            </div>
-        </div>
+    <form action="{{ url_for('insert_band')}}" method="POST">
         <div class="form-group">
             <label for="band_name">Band Name</label>
             <div class="input-group">

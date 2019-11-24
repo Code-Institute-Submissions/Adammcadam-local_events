@@ -9,8 +9,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <img src="{{ band.band_logo }}"></img>
-                        <h5 class="card-title"><a href="{{ url_for('band', band_id=band._id) }}">{{ band.band_name }}</a></h5>
+                        <h5 class="card-title"><a id="alert" href="/get_bands">{{ band.band_name }}</a></h5>
                         <p>Event details: {{ band.event_date}} @ {{ band.venue_name }}</p>
                     </div>
                 </div>
@@ -18,5 +17,14 @@
         {% endfor %}
     </div>
 </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $('#alert').on('click', function() {
+            alert('Coming Soon!')
+        })
+    });
+</script>
 
 {% endblock %}
