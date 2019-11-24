@@ -26,6 +26,8 @@ To improve the user experience more I would like to add the ability to see venue
 
 > The ability for bands to add their merch stores to their cards
 
+> much stricter form validation
+
 The following technologies were used in the design and build of this project.
 
 #### [Python](https://www.python.org/)
