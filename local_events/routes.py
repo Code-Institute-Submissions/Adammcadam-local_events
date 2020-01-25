@@ -13,7 +13,7 @@ def home():
     return render_template('home.html', recent_bands=recent_bands, most_viewed=most_viewed)
 
 @app.route('/about')
-def home():
+def about():
     return render_template('about.html', title='About')
 
 @app.route("/create_gig", methods=['GET', 'POST'])
