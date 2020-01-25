@@ -7,12 +7,15 @@ from local_events.forms import CreateBandForm, CreateVenueForm
 
 @app.route('/')
 @app.route('/home')
-def get_bands():
+def home():
     recent_bands = mongo.db.bands.find().sort([("event_date", -1)]).limit(4)
     most_viewed = mongo.db.bands.find().sort([("views", -1)]).limit(4)
-    return render_template("home.html", recent_bands=recent_bands, most_viewed=most_viewed)
+    return render_template('home.html', recent_bands=recent_bands, most_viewed=most_viewed)
 
-    
+@app.route('/about')
+def home():
+    return render_template('about.html', title='About')
+
 @app.route("/create_gig", methods=['GET', 'POST'])
 def create_gig():
     form = CreateBandForm()
@@ -76,19 +79,19 @@ def venues():
     venues = venue_collection.find()
     return render_template('venues.html', title='Venues', venues=venues)
     
-@app.route('/complete_event/<band_id>', methods=['GET', 'POST'])
-def complete_event(band_id):
-    band_db = mongo.db.bands.find_one({"_id": ObjectId(band_id)})
-    band_db = mongo.db.bands
-    band_db.update_one({
-        '_id' : ObjectId(band_id)
-    }, {
-        '$set' : {
-            'is_done' : True 
-        }
-    })
-    flash(f'Gig Completed!', 'success')
-    return redirect(url_for('home'))
+# @app.route('/complete_event/<band_id>', methods=['GET', 'POST'])
+# def complete_event(band_id):
+#     band_db = mongo.db.bands.find_one({"_id": ObjectId(band_id)})
+#     band_db = mongo.db.bands
+#     band_db.update_one({
+#         '_id' : ObjectId(band_id)
+#     }, {
+#         '$set' : {
+#             'is_done' : True 
+#         }
+#     })
+#     flash(f'Gig Completed!', 'success')
+#     return redirect(url_for('home'))
 
 @app.route('/bands')
 def bands():
