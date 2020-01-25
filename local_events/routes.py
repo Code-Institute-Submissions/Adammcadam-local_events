@@ -115,11 +115,6 @@ def insert_venue():
 @app.errorhandler(404)
 def handle_404(exception):
     return render_template('404.html', exception=exception)
-    
-if __name__ == '__main__':
-    app.run(host=os.environ.get('IP'),
-            port=int(os.environ.get('PORT')),
-            debug=True)
             
 
             
