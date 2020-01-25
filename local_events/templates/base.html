@@ -17,49 +17,57 @@
     {% endif %}
 </head>
 <body>
-    <header class="wrapper">
-        <div class="logo">
-            <img src="#" alt="#">
-        </div>
-        <div class="welcome-text">
-            <h1>Welcome To Local Music Events</h1>
-            <a href="">Explore <i class="fas fa-arrow-down"></i></a>
-        </div>
-        <ul class="nav-area">
-            <li><a href="{{ url_for('home') }}">Home <i class="fas fa-home"></i></a></li>
-            <li><a href="{{ url_for('about') }}">About <i class="fas fa-question"></i></a></li>
-            <li><a href="{{ url_for('venues') }}">Venues <i class="fas fa-map-marker"></i></a></li>
-            <li><a href="{{ url_for('create_gig') }}">New Gig <i class="fas fa-guitar"></i></a></li>
-        </ul>
-    </header>
-    <!-- <main class="container">
-        <div class="row">
-            <div class="col-md-8">
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                        {% for category, message in messages %}
-                            <div class="alert alert-{{ category }}">
-                                {{ message }}
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
-                {% block body %}{% endblock %}
+    <div class="site-header">
+        <nav>
+            <div class="hamburger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
             </div>
-            <div class="col-md-4">
-                <div class="content-section mt-4">
-                    <h3>Sidebar</h3>
-                    <p class="text">You can sort by the following:</p>
-                    <ul class="list-group list-group-flush">
-                        <li class="btn btn-light mb-1">Latest Gigs</li>
-                        <li class="btn btn-light">Upcoming Gigs</li>
-                    </ul>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+                <li><a href="{{ url_for('venues') }}">Venues</a></li>
+                <li><a href="{{ url_for('create_gig') }}">Add a Gig</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="page-content">
+        <header class="home-banner" id="hide">
+            <div class="home-banner-fix">
+                <div class="home-banner-content">
+                    <div class="content-container">
+                        <div class="home-banner-title-wrap">
+                            <h1 class="home-banner-title">
+                                Welcome To<br/>
+                                Local Music Events
+                            </h1>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="scrollto-wrap">
+                <a href="#" class="btn-special">Explore</a>
+            </div>
+        </header>
+    </div>
+    <main class="container">
+        <div class="row">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            {% block body %}{% endblock %}
         </div>
-    </main> -->
+    </main>
 
     <!-- Javascripts -->
+    <script src="{{ url_for('static', filename='js/nav.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

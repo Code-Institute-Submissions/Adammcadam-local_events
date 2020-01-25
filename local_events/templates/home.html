@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block body %}
+<div class="col-md-8">
     {% for band in bands %}
         <div class="card w-auto p-3 mt-4" style="width: 18rem;">
             <img src="{{ url_for('static', filename = 'images/default.png') }}" class="card-img-top" alt="">
@@ -18,4 +19,15 @@
             </div>
         </div>
     {% endfor %}
+</div>
+<div class="col-md-4">
+    <div class="content-section mt-4">
+        <h3>Sidebar</h3>
+        <p class="text">You can sort by the following:</p>
+        <ul class="list-group list-group-flush">
+            <li class="btn btn-light mb-1">Latest Gigs</li>
+            <li class="btn btn-light">Upcoming Gigs</li>
+        </ul>
+    </div>
+</div>
 {% endblock %}
