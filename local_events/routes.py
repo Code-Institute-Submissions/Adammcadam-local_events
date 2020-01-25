@@ -1,7 +1,7 @@
 import os
 import math
 from local_events import app, mongo
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for, flash
 from bson.objectid import ObjectId
 from local_events.forms import CreateBandForm, CreateVenueForm
 
@@ -10,7 +10,7 @@ from local_events.forms import CreateBandForm, CreateVenueForm
 def get_bands():
     recent_bands = mongo.db.bands.find().sort([("event_date", -1)]).limit(4)
     most_viewed = mongo.db.bands.find().sort([("views", -1)]).limit(4)
-    return render_template("index.html", recent_bands=recent_bands, most_viewed=most_viewed)
+    return render_template("home.html", recent_bands=recent_bands, most_viewed=most_viewed)
 
     
 @app.route("/create_gig", methods=['GET', 'POST'])
@@ -87,7 +87,8 @@ def complete_event(band_id):
             'is_done' : True 
         }
     })
-    return redirect(url_for('get_bands'))
+    flash(f'Gig Completed!', 'success')
+    return redirect(url_for('home'))
 
 @app.route('/bands')
 def bands():
