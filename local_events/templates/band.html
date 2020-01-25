@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <div class="card w-75 rounded w-auto p-3 mt-4">
+        <img src="{{ url_for('static', filename = 'images/default.png') }}" class="card-img-top-band" alt="">
+        <div class="card-body">
+            <h5 class="card-title">{{ band.band_name }}</h5>
+            <p class="card-text">Upcoming Dates: {{ band.event_date }}</p>
+            <a href="{{ url_for('venue', venue_id=band.venue._id) }}" class="btn btn-outline-info">Venue</a>
+            <a href="{{ url_for('update_band', band_id=band._id )}}" class="btn btn-primary">Update</a>
+            <a href="{{ url_for('delete_band', band_id=band._id )}}" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+{% endblock %}

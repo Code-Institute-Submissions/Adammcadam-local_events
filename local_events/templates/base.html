@@ -4,61 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Local Events</title>
-    <!--favicons -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon/guitar-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon/guitar-16x16.png">
-    <!--stylesheet-->
+
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css')}}" type="text/css">
+    <!-- fontawesome  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" type="text/css" />
-    <!--datetime picker -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+    {% if title %}
+        <title>Local Music - {{ title }}</title>
+    {% else %}
+        <title>Local Music</title>
+    {% endif %}
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-            <a class="navbar-brand" href="/"> <img src="/static/favicon/guitar-16x16.png" alt="guitar-logo"> Local Events</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{url_for('get_bands')}}">Home <span id="ready" class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('bands')}}">Bands</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('get_venues')}}">Venues</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('add_band')}}"><i class="fas fa-plus-square"></i> Add a Band</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('insert_venue')}}"><i class="fas fa-plus-square"></i> Add a Venue</a>
-                </li>
-            </ul>
+    <header class="wrapper">
+        <div class="logo">
+            <img src="#" alt="#">
         </div>
-        </nav>
+        <div class="welcome-text">
+            <h1>Welcome To Local Music Events</h1>
+            <a href="">Explore <i class="fas fa-arrow-down"></i></a>
+        </div>
+        <ul class="nav-area">
+            <li><a href="{{ url_for('home') }}">Home <i class="fas fa-home"></i></a></li>
+            <li><a href="{{ url_for('about') }}">About <i class="fas fa-question"></i></a></li>
+            <li><a href="{{ url_for('venues') }}">Venues <i class="fas fa-map-marker"></i></a></li>
+            <li><a href="{{ url_for('create_gig') }}">New Gig <i class="fas fa-guitar"></i></a></li>
+        </ul>
     </header>
-    <section class="padding">
-        {% block content %}{% endblock %}
-    </section>
-    <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
-        <div class="container text-center">
-          <small>Local Events by Adam Wragg</small>
+    <main class="container">
+        <div class="row">
+            <div class="col-md-8">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                {% block body %}{% endblock %}
+            </div>
+            <div class="col-md-4">
+                <div class="content-section mt-4">
+                    <h3>Sidebar</h3>
+                    <p class="text">You can sort by the following:</p>
+                    <ul class="list-group list-group-flush">
+                        <li class="btn btn-light mb-1">Latest Gigs</li>
+                        <li class="btn btn-light">Upcoming Gigs</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </footer>
+    </main>
+
+    <!-- Javascripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
-<script type="text/javascript">
-    $('document').ready(function() {
-        // Get the current page
-    })
-</script>
