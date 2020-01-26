@@ -3,7 +3,7 @@
 ## What does it do and what need does it fulfil?
 This project uses skills gained to build a Flask website that uses a MongoDB backend. It is for people in my local area to view local upcoming events and bands. 
 It is also intended for local venues to match with local bands giving bands somewhere new to play and venues new bands to play at their venues
-The project itself can be viewed here [https://local-events-flask-mongo.herokuapp.com/](https://local-events-flask-mongo.herokuapp.com/)
+The project itself can be viewed here [https://local-music-events-flask.herokuapp.com/](https://local-music-events-flask.herokuapp.com/)
 
 ## Project Functionality
 The website is fully responsive and uses Mongo DB to hold bands and venue collections. The user is able to create, edit, update and delete their own bands and/or venues.
