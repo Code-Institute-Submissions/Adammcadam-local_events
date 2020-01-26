@@ -1,6 +1,6 @@
 import unittest
 from local_events import app
-from local_events import routes
+from local_events import routes, venues_collection, bands_collection
 import os
 from flask import url_for, session
 
@@ -12,10 +12,7 @@ class testApp(unittest.TestCase):
         app.config['TESTING'] = True
         app.config['WTF_CSRF_ENABLED'] = False
         app.config['DEBUG'] = False
-        self.app = project.app.test_client()
- 
-        # Disable sending emails during unit testing
-        self.assertEqual(app.debug, False)
+        self.app = app.test_client()
  
     # executed after each test
     def tearDown(self):
