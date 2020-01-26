@@ -49,7 +49,6 @@ nav {
     color: #fff;
     text-decoration: none;
     letter-spacing: 3px;
-    font-weight: bold;
     font-size: 14px;
 }
 
@@ -68,6 +67,11 @@ nav {
 
 header {
     position: absolute;
+}
+
+.header-text a {
+    text-decoration: none;
+    color: #fff
 }
 
 .home-banner {
@@ -219,8 +223,9 @@ legend {
 
 .form-control {
     border: 2px solid #B2B9BA;
-    border-radius: 1rem;
+    border-radius: 5px;
     background: #5A665C;
+    color: #fff
 }
 
 .form-control-label {

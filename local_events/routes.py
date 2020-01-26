@@ -84,19 +84,19 @@ def venues():
     venues = venue_collection.find()
     return render_template('venues.html', title='Venues', venues=venues)
     
-# @app.route('/complete_event/<band_id>', methods=['GET', 'POST'])
-# def complete_event(band_id):
-#     band_db = mongo.db.bands.find_one({"_id": ObjectId(band_id)})
-#     band_db = mongo.db.bands
-#     band_db.update_one({
-#         '_id' : ObjectId(band_id)
-#     }, {
-#         '$set' : {
-#             'is_done' : True 
-#         }
-#     })
-#     flash(f'Gig Completed!', 'success')
-#     return redirect(url_for('home'))
+@app.route('/complete_event/<band_id>', methods=['GET', 'POST'])
+def complete_event(band_id):
+    bands_collection = mongo.db.bands
+    band_db = bands_collection.find_one({"_id": ObjectId(band_id)})
+    band_db.update_one({
+        '_id' : ObjectId(band_id)
+    }, {
+        '$set' : {
+            'is_done' : True 
+        }
+    })
+    flash(f'Gig Completed!', 'success')
+    return redirect(url_for('home'))
 
 @app.route('/bands')
 def bands():

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block body %}
+<div class="col-md-12">
     <div class="content-section mt-4">
         <form action="" method="POST">
             {{ form.hidden_tag() }}
@@ -45,7 +46,35 @@
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.event_date(class="form-control form-control-lg") }}
+                        {{ form.event_date(class="form-control form-control-lg", id="datepicker") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.is_headlining.label(class="form-control-label") }}
+
+                    {% if form.is_headlining.errors %}
+                        {{ form.is_headlining(class="form-control form-control-lg is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.is_headlining.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.is_headlining(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.band_logo.label(class="form-control-label") }}
+
+                    {% if form.band_logo.errors %}
+                        {{ form.band_logo(class="form-control form-control-lg is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.band_logo.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.band_logo(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
             </fieldset>
@@ -54,4 +83,16 @@
             </div>
         </form>
     </div>
+</div>
 {% endblock %}
+
+<script type="text/javascript">
+    $('#datepicker').pickadate({
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: 15, // Creates a dropdown of 15 years to control year,
+        today: 'Today',
+        clear: 'Clear',
+        close: 'Ok',
+        closeOnSelect: false // Close upon selecting a date,
+    });
+</script>
