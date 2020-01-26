@@ -28,8 +28,9 @@ def create_gig():
     for venue in venues:
         v_id = venue['_id']
         v_name = venue['venue_name']
+        print(v_name)
     #Now forming the list of tuples for SelectField
-    venues_list = [(v_id, v_name) for i in venues]
+    venues_list = [(v_id, v_name) for v_name in venues]
     form = CreateBandForm()
     form.venue_name.choices = venues_list
     if request.method == 'POST' and form.validate_on_submit():
@@ -99,7 +100,7 @@ def bands():
 
 @app.route('/venues')
 def venues():
-    venues_collection = mongo.db.bands
+    venues_collection = mongo.db.venues
     venues = venues_collection.find()
     return render_template('venues.html', venues=venues)
 
