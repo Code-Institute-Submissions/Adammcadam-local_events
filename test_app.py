@@ -1,4 +1,5 @@
 import unittest
+from local_events import app
 import app as project
 from local_events import routes
 import os
