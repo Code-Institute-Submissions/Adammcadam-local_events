@@ -6,8 +6,6 @@ from local_events import mongo
 
 class CreateBandForm(FlaskForm):
     band_name = StringField('Band Name', validators=[DataRequired()])
-    event_date = DateField('Gig Date', validators=[InputRequired()])
-    is_headlining = BooleanField('Are They Headlining?', validators=[InputRequired()])
     band_logo = StringField('Band Logo')
     submit = SubmitField('Add Gig')
 

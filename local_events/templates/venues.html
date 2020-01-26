@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
 {% block body %}
+<div class="col-md-12">
+    <div class="content">
+        <a class="btn btn-dark ml-2" href="{{ url_for('create_venue') }}">Create Venue</a>
+    </div>
+</div>
     {% for venue in venues %}
         <div class="card w-auto p-3 m-4" style="width: 18rem;">
             <div class="card-body">

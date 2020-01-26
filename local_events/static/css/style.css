@@ -5,8 +5,8 @@
 }
 
 body {
-    background: #fff;
-    color: rgb(135, 151, 138);
+    background: #BCC3C4;
+    color: #5A665C;
     font-family: 'Poppins', sans-serif;;
 }
 
@@ -16,7 +16,7 @@ body {
     top: 0;
     left: 0;
     z-index: 30;
-    background-color: rgb(135, 151, 138);
+    background-color: #BCC3C4;
 }
 
 nav {
@@ -28,7 +28,7 @@ nav {
 }
 
 .logo {
-    color: rgb(135, 151, 138);
+    color: #BCC3C4;
     text-transform: uppercase;
     letter-spacing: 5px;
     font-size: 20px;
@@ -45,7 +45,7 @@ nav {
 }
 
 .nav-links a {
-    color: rgb(135, 151, 138);
+    color: #BCC3C4;
     text-decoration: none;
     letter-spacing: 3px;
     font-size: 14px;
@@ -59,7 +59,7 @@ nav {
 .burger div {
     width: 25px;
     height: 2px;
-    background-color: rgb(135, 151, 138);
+    background-color: #BCC3C4;
     margin: 5px;
     transition: all 0.5s ease;
 }
@@ -70,7 +70,7 @@ header {
 
 .header-text a {
     text-decoration: none;
-    color: rgb(135, 151, 138)
+    color: #BCC3C4
 }
 
 .home-banner {
@@ -137,14 +137,14 @@ header {
 }
 
 .btn-special {
-    border: 4px solid rgb(135, 151, 138);
+    border: 4px solid #BCC3C4;
     padding: 10px 25px;
     text-decoration: none;
     text-transform: uppercase;
     font-size: 14px;
     margin-top: 20px;
     display: inline-block;
-    color: rgb(135, 151, 138);
+    color: #BCC3C4;
     position: relative;
 }
 
@@ -177,7 +177,7 @@ header {
 }
 
 .btn-special:hover {
-    color: #fff;
+    color: #BCC3C4;
 }
 
 .main-content {
@@ -186,49 +186,48 @@ header {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: rgb(135, 151, 138)
+    color: #5A665C
 }
 
 .content-section {
-    background: #fff;
+    background: #BCC3C4;
     padding: 10px 20px;
-    border: 2px solid rgb(135, 151, 138);
+    border: 2px solid #BCC3C4;
     border-radius: 1rem;
     margin-bottom: 25px;
 }
 
 .list-group-item-light {
-    background: #fff;
-    color: rgb(135, 151, 138);
+    background: #5A665C;
+    color: #BCC3C4;
 }
 
 .card {
-    background: #fff;
-    border: 2px solid rgb(135, 151, 138);
+    background: #BCC3C4;
+    border: 2px solid #5A665C;
     border-radius: 1rem;
 }
 
 .list-group-item {
-    background: #fff;
-    color: rgb(135, 151, 138);
-    border: none;
+    background: #BCC3C4;
+    color: #5A665C
     text-align: left;
 }
 
 legend {
     font-weight: 500;
-    color: rgb(135, 151, 138);
+    color: #5A665C;
 }
 
 .form-control {
-    border: 2px solid rgb(135, 151, 138);
+    border: 2px solid #BCC3C4;
     border-radius: 5px;
     background: #fff;
-    color: rgb(135, 151, 138)
+    color: #BCC3C4
 }
 
 .form-control-label {
-    color: rgb(135, 151, 138);
+    color: #BCC3C4;
 }
 
 .card-img-top {
@@ -242,7 +241,7 @@ legend {
 }
 
 .text {
-    color: rgb(135, 151, 138);
+    color: #5A665C;
 }
 
 @media screen and (max-width: 1024px) {

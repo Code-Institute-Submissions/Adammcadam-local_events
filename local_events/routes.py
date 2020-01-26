@@ -23,18 +23,17 @@ def about():
 
 @app.route("/create_gig", methods=['GET', 'POST'])
 def create_gig():
+    form = CreateBandForm()
     if request.method == 'POST' and form.validate_on_submit():
         bands_db = mongo.db.bands
         bands_db.insert({
             'band_name' : request.form['band_name'],
-            'event_date' : request.form['event_date'],
-            'is_headlining' : request.form['is_headlining'],
             'band_logo' : request.form['band_logo'],
             'views' : 0, 
         })
         flash(f'Band created for {form.band_name.data}!', 'success')
         return redirect(url_for('home'))
-    return render_template('create_gig.html', title='Create Gig', form=form)
+    return render_template('create_band.html', title='Create Band', form=form)
     
 @app.route('/gig/<band_id>', methods=['GET', 'POST'])
 def band(band_id):
@@ -91,7 +90,7 @@ def venues():
     venues = venues_collection.find()
     return render_template('venues.html', venues=venues)
 
-@app.route('/create-venue')
+@app.route('/create-venue', methods=['GET', 'POST'])
 def create_venue():
     form = CreateVenueForm()
     if request.method == 'POST' and form.validate_on_submit():

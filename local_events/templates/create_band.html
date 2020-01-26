@@ -22,34 +22,6 @@
                     {% endif %}
                 </div>
                 <div class="form-group">
-                    {{ form.event_date.label(class="form-control-label") }}
-
-                    {% if form.event_date.errors %}
-                        {{ form.event_date(class="form-control form-control-lg is-invalid")}}
-                        <div class="invalid-feedback">
-                            {% for error in form.event_date.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.event_date(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.is_headlining.label(class="form-control-label") }}
-
-                    {% if form.is_headlining.errors %}
-                        {{ form.is_headlining(class="form-control form-control-lg is-invalid")}}
-                        <div class="invalid-feedback">
-                            {% for error in form.is_headlining.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.is_headlining(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
                     {{ form.band_logo.label(class="form-control-label") }}
 
                     {% if form.band_logo.errors %}
