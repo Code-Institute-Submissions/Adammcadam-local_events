@@ -23,13 +23,23 @@ def about():
 
 @app.route("/create_gig", methods=['GET', 'POST'])
 def create_gig():
+    venues_collection = mongo.db.venues
+    venues = venues_collection.find()
+    for venue in venues:
+        v_id = venue['_id']
+        v_name = venue['venue_name']
+    #Now forming the list of tuples for SelectField
+    venues_list = [(v_id, v_name) for i in venues]
     form = CreateBandForm()
+    form.venue_name.choices = venues_list
     if request.method == 'POST' and form.validate_on_submit():
         bands_db = mongo.db.bands
         bands_db.insert({
             'band_name' : request.form['band_name'],
             'venue_name' : request.form['venue_name'],
             'event_date' : request.form['event_date'],
+            'is_headlining' : request.form['is_headlining'],
+            'band_logo' : request.form['band_logo'],
             'views' : 0, 
         })
         flash(f'Band created for {form.band_name.data}!', 'success')
@@ -58,8 +68,8 @@ def update_band(band_id):
             '$set' :  {
                 'band_name' : request.form['band_name'],
                 'venue_name' : request.form['venue_name'],
-                'is_headlining' : request.form['is_headlining'],
                 'event_date' : request.form['event_date'],
+                'is_headlining' : request.form['is_headlining'],
                 'band_logo' : request.form['band_logo']
             }
         })
@@ -78,26 +88,6 @@ def delete_band(band_id):
     flash(f'Band deleted!', 'success')
     return redirect(url_for('home'))
 
-@app.route('/venues/')
-def venues():
-    venue_collection = mongo.db.venues
-    venues = venue_collection.find()
-    return render_template('venues.html', title='Venues', venues=venues)
-    
-@app.route('/complete_event/<band_id>', methods=['GET', 'POST'])
-def complete_event(band_id):
-    bands_collection = mongo.db.bands
-    band_db = bands_collection.find_one({"_id": ObjectId(band_id)})
-    band_db.update_one({
-        '_id' : ObjectId(band_id)
-    }, {
-        '$set' : {
-            'is_done' : True 
-        }
-    })
-    flash(f'Gig Completed!', 'success')
-    return redirect(url_for('home'))
-
 @app.route('/bands')
 def bands():
     per_page = 8
@@ -106,6 +96,27 @@ def bands():
     all_bands = mongo.db.bands.find().skip((page - 1)*per_page).limit(per_page)
     pages = range(1, int(math.ceil(total / per_page)) + 1)
     return render_template('bands.html', bands=all_bands, page=page, pages=pages, total=total)
+
+@app.route('/venues')
+def venues():
+    venues_collection = mongo.db.bands
+    venues = venues_collection.find()
+    return render_template('venues.html', venues=venues)
+
+@app.route('/create-venue')
+def create_venue():
+    form = CreateVenueForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        venues_db = mongo.db.venues
+        venues_db.insert({
+            'venue_name' : request.form['venue_name'],
+            'address' : request.form['address'],
+            'postcode' : request.form['postcode'],
+            'website' : request.form['website'],
+        })
+        flash(f'Venue created for {form.venue_name.data}!', 'success')
+        return redirect(url_for('home'))
+    return render_template('create_venue.html', title='Create Venue', form=form)
     
     
 @app.errorhandler(404)

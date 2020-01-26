@@ -6,7 +6,7 @@
 }
 
 body {
-    background: #5A665C;
+    background: rgb(135, 151, 138);
     color: #EDF5FC;
     font-family: 'Poppins', sans-serif;;
 }
@@ -17,7 +17,7 @@ body {
     top: 0;
     left: 0;
     z-index: 30;
-    background-color: #5A665C;
+    background-color: rgb(135, 151, 138);
 }
 
 nav {
@@ -191,7 +191,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .content-section {
-    background: #5A665C;
+    background: rgb(135, 151, 138);
     padding: 10px 20px;
     border: 2px solid #B2B9BA;
     border-radius: 1rem;
@@ -199,18 +199,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .list-group-item-light {
-    background: #5A665C;
+    background: rgb(135, 151, 138);
     color: #EDF5FC;
 }
 
 .card {
-    background: #5A665C;
+    background: rgb(135, 151, 138);
     border: 2px solid #B2B9BA;
     border-radius: 1rem;
 }
 
 .list-group-item {
-    background: #5A665C;
+    background: rgb(135, 151, 138);
     color: #EDF5FC;
     border: none;
     text-align: left;
@@ -224,7 +224,7 @@ legend {
 .form-control {
     border: 2px solid #B2B9BA;
     border-radius: 5px;
-    background: #5A665C;
+    background: rgb(135, 151, 138);
     color: #fff
 }
 
