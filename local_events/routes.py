@@ -23,21 +23,10 @@ def about():
 
 @app.route("/create_gig", methods=['GET', 'POST'])
 def create_gig():
-    venues_collection = mongo.db.venues
-    venues = venues_collection.find()
-    for venue in venues:
-        v_id = venue['_id']
-        v_name = venue['venue_name']
-        print(v_name)
-    #Now forming the list of tuples for SelectField
-    venues_list = [(v_id, v_name) for v_name in venues]
-    form = CreateBandForm()
-    form.venue_name.choices = venues_list
     if request.method == 'POST' and form.validate_on_submit():
         bands_db = mongo.db.bands
         bands_db.insert({
             'band_name' : request.form['band_name'],
-            'venue_name' : request.form['venue_name'],
             'event_date' : request.form['event_date'],
             'is_headlining' : request.form['is_headlining'],
             'band_logo' : request.form['band_logo'],
@@ -68,7 +57,6 @@ def update_band(band_id):
         }, {
             '$set' :  {
                 'band_name' : request.form['band_name'],
-                'venue_name' : request.form['venue_name'],
                 'event_date' : request.form['event_date'],
                 'is_headlining' : request.form['is_headlining'],
                 'band_logo' : request.form['band_logo']
@@ -78,7 +66,6 @@ def update_band(band_id):
         return redirect(url_for('band', band_id=band._id))
     elif request.method == 'GET':
         form.band_name.data = band.band_name
-        form.venue_name.data = band.venue_name
         form.event_date.data = band.event_date
     return render_template('create_gig.html', title='Update Gig', form=form)
 

@@ -4,15 +4,8 @@ from wtforms.validators import DataRequired, InputRequired
 from wtforms.fields.html5 import DateField
 from local_events import mongo
 
-venues_collection = mongo.db.venues
-venues = venues_collection.find()
-for venue in venues:
-    v_id = venue['_id']
-    v_name = venue['venue_name']
-
 class CreateBandForm(FlaskForm):
     band_name = StringField('Band Name', validators=[DataRequired()])
-    venue_name = SelectField(u'Venue', coerce=int, choices=[(0, v_name)], validators=[InputRequired()])
     event_date = DateField('Gig Date', validators=[InputRequired()])
     is_headlining = BooleanField('Are They Headlining?', validators=[InputRequired()])
     band_logo = StringField('Band Logo')
