@@ -130,10 +130,9 @@ def update_venue(venue_id):
 @app.route('/venues/<venue_id>/delete', methods=['POST'])
 def venue_band(venue_id):
     venues_collection = mongo.db.venues
-    venues_collection.delete_one({"_id": ObjectId(band_id)})
+    venues_collection.delete_one({"_id": ObjectId(venue_id)})
     flash(f'Venue deleted!', 'success')
     return redirect(url_for('venues'))
-    
     
 @app.errorhandler(404)
 def handle_404(exception):
