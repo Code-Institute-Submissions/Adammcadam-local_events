@@ -6,11 +6,16 @@ from bson.objectid import ObjectId
 from local_events.forms import CreateBandForm, CreateVenueForm
 
 @app.route('/')
+def welcome():
+    return render_template('welcome.html')
+
 @app.route('/home')
 def home():
+    bands_collection = mongo.db.bands
+    bands = bands_collection.find()
     recent_bands = mongo.db.bands.find().sort([("event_date", -1)]).limit(4)
     most_viewed = mongo.db.bands.find().sort([("views", -1)]).limit(4)
-    return render_template('home.html', recent_bands=recent_bands, most_viewed=most_viewed)
+    return render_template('home.html', bands=bands, recent_bands=recent_bands, most_viewed=most_viewed)
 
 @app.route('/about')
 def about():

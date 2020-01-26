@@ -1,33 +1,33 @@
 {% extends "base.html" %}
 
 {% block body %}
-<div class="col-md-8">
-    {% for band in bands %}
-        <div class="card w-auto p-3 mt-4" style="width: 18rem;">
-            <img src="{{ url_for('static', filename = 'images/default.png') }}" class="card-img-top" alt="">
-            <div class="card-body">
-                <h5 class="card-title">{{ band.band_name }}</h5>
+    <div class="col-md-8">
+        {% for band in bands %}
+            <div class="card w-auto p-3 mt-4" style="width: 18rem;">
+                <img src="{{ url_for('static', filename = 'images/default.png') }}" class="card-img-top" alt="">
+                <div class="card-body">
+                    <h5 class="card-title">{{ band.band_name }}</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Venue: {{ band.venue_name }}</li>
+                    <li class="list-group-item">When: {{ band.event_date }}</li>
+                    <li class="list-group-item">Views: {{ band.views }}</li>
+                </ul>
+                <div class="card-body">
+                    <a href="{{ url_for('band', band_id=band._id )}}" class="btn btn-light">Band link</a>
+                    <a href="#" class="btn btn-light">Venue link</a>
+                </div>
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Venue: {{ band.venue_name }}</li>
-                <li class="list-group-item">When: {{ band.event_date }}</li>
-                <li class="list-group-item">Views: {{ band.views }}</li>
-            </ul>
-            <div class="card-body">
-                <a href="{{ url_for('band', band_id=band._id )}}" class="btn btn-light">Band link</a>
-                <a href="#" class="btn btn-light">Venue link</a>
-            </div>
-        </div>
-    {% endfor %}
-</div>
-<div class="col-md-4">
-    <div class="content-section mt-4">
-        <h3>Sidebar</h3>
-        <p class="text">You can sort by the following:</p>
-        <ul class="list-group list-group-flush">
-            <li class="btn btn-light mb-1">Latest Gigs</li>
-            <li class="btn btn-light">Upcoming Gigs</li>
-        </ul>
+        {% endfor %}
     </div>
-</div>
+    <div class="col-md-4">
+        <div class="content-section mt-4">
+            <h3>Sidebar</h3>
+            <p class="text">You can sort by the following:</p>
+            <ul class="list-group list-group-flush">
+                <li class="btn btn-light mb-1">Latest Gigs</li>
+                <li class="btn btn-light">Upcoming Gigs</li>
+            </ul>
+        </div>
+    </div>
 {% endblock %}
