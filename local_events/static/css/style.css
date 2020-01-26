@@ -6,7 +6,7 @@
 
 body {
     background: #fff;
-    color: #EDF5FC;
+    color: rgb(135, 151, 138);
     font-family: 'Poppins', sans-serif;;
 }
 
@@ -199,7 +199,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .list-group-item-light {
     background: #fff;
-    color: #EDF5FC;
+    color: rgb(135, 151, 138);
 }
 
 .card {
@@ -210,7 +210,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .list-group-item {
     background: #fff;
-    color: #EDF5FC;
+    color: rgb(135, 151, 138);
     border: none;
     text-align: left;
 }
