@@ -1,6 +1,5 @@
 import unittest
 from local_events import app
-import app as project
 from local_events import routes
 import os
 from flask import url_for, session
@@ -23,7 +22,7 @@ class testApp(unittest.TestCase):
         pass
     
     """
-    Test suite for app.py
+    Test suite for run.py
     """
     def test_is_this_thing_on(self):
         self.assertEqual(1, 1)
