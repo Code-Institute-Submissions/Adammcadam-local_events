@@ -123,6 +123,10 @@ def create_venue():
 @app.errorhandler(404)
 def handle_404(exception):
     return render_template('404.html', exception=exception)
+
+@app.errorhandler(500)
+def server_error(e):
+    return render_template('500.html'), 500
             
 
             
