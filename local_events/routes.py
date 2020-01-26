@@ -56,8 +56,6 @@ def update_band(band_id):
         }, {
             '$set' :  {
                 'band_name' : request.form['band_name'],
-                'event_date' : request.form['event_date'],
-                'is_headlining' : request.form['is_headlining'],
                 'band_logo' : request.form['band_logo']
             }
         })
@@ -65,7 +63,6 @@ def update_band(band_id):
         return redirect(url_for('band', band_id=band._id))
     elif request.method == 'GET':
         form.band_name.data = band.band_name
-        form.event_date.data = band.event_date
     return render_template('create_gig.html', title='Update Gig', form=form)
 
 @app.route('/gig/<band_id>/delete', methods=['POST'])
@@ -104,6 +101,38 @@ def create_venue():
         flash(f'Venue created for {form.venue_name.data}!', 'success')
         return redirect(url_for('home'))
     return render_template('create_venue.html', title='Create Venue', form=form)
+
+@app.route('/venues/<venue_id>/update', methods=['GET', 'POST'])
+def update_venue(venue_id):
+    venues_collection = mongo.db.venues
+    venue = venues_collection.find_one_or_404({"_id": ObjectId(venue_id)})
+    form = CreateVenueForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        venue.update_one({
+            '_id' : ObjectId(venue_id)
+        }, {
+            '$set' :  {
+                'venue_name' : request.form['venue_name'],
+                'address' : request.form['address'],
+                'postcode' : request.form['postcode'],
+                'website' : request.form['website'],
+            }
+        })
+        flash(f'Venue updated for {form.venue_name.data}!', 'success')
+        return redirect(url_for('venues'))
+    elif request.method == 'GET':
+        form.venue_name.data = venue.venue_name
+        form.address.data = venue.address
+        form.postcode.data = venue.postcode
+        form.website.data = venue.website
+    return render_template('create_venue.html', title='Update Gig', form=form)
+
+@app.route('/venues/<venue_id>/delete', methods=['POST'])
+def venue_band(venue_id):
+    venues_collection = mongo.db.venues
+    venues_collection.delete_one({"_id": ObjectId(band_id)})
+    flash(f'Venue deleted!', 'success')
+    return redirect(url_for('venues'))
     
     
 @app.errorhandler(404)
