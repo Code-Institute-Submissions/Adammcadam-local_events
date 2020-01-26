@@ -16,8 +16,8 @@
                 <li class="list-group-item">Postcode: {{ venue.postcode }}</li>
                 <li class="list-group-item">Website: <a class="btn btn-dark" target="_blank" href="{{ venue.website }}"><i class="fas fa-binoculars"></i></a></li>
             </ul>
-            <a href="" class="btn btn-primary mb-1">Update</a>
-            <a href="" class="btn btn-danger">Delete</a>
+            <a href="{{ url_for('update_venue', venue_id=venue._id ) }}" class="btn btn-primary mb-1">Update</a>
+            <a href="{{ url_for('delete_venue', venue_id=venue._id ) }}" class="btn btn-danger">Delete</a>
         </div>
     {% endfor %}
 {% endblock %}
